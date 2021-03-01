@@ -1,0 +1,17 @@
+00 <identificador> bool
+01 <identificador> main
+02 <identificador> Principal
+03 <identificador> lol
+04 <delimitador> {
+05 <identificador> metodo
+06 <delimitador> [
+07 <número> 30
+08 <delimitador> ]
+09 <cadeia_de_caracteres> "loikiiikkkkk"
+10 <cadeia_de_caracteres> ""
+11 <palavra_reservada> var
+12 <identificador> lollll
+13 <delimitador> }
+
+00 <simbolo_invalido> :
+00 <simbolo_invalido> :
