@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 /**
  *
- * @author Leonardo
+ * @author Leonardo e Luiz
  */
 public enum TokenType {
     Reserved,
@@ -26,38 +21,39 @@ public enum TokenType {
     InvalidSymbol,
     InvalidComment;
 
+    @Override
     public String toString() {
         switch (this) {
             case Reserved:
-                return "palavra_reservada";
+                return "PRE";
             case BlockComment:
                 return "comentário_de_bloco";
             case LineComment:
                 return "comentário_de_linha";
             case String:
-                return "cadeia_de_caracteres";
+                return "CAD";
             case LogicalOperator:
-                return "operador_lógico";
+                return "LOG";
             case Identifier:
-                return "identificador";
+                return "IDE";
             case ArithmeticOperator:
-                return "operador_aritmético";
+                return "ART";
             case Delimiter:
-                return "delimitador";
+                return "DEL";
             case RelationalOperator:
-                return "operador_relacional";
+                return "REL";
             case Number:
-                return "número";
+                return "NRO";
             case InvalidString:
-                return "cadeia_mal_formada";
+                return "CMF";
             case InvalidCharacter:
                 return "caractere_mal_formado";
             case InvalidNumber:
-                return "número_mal_formado";
+                return "NMF";
             case InvalidSymbol:
-                return "simbolo_invalido";
+                return "SIB";
             case InvalidComment:
-                return "comentario_mal_formado";
+                return "CoMF";
             default:
                 return super.toString();
         }

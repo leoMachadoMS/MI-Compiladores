@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.util.ArrayList;
@@ -11,7 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author Leonardo
+ * @author Leonardo e Luiz
  */
 public class Lexer {
 
@@ -67,7 +62,7 @@ public class Lexer {
         ArrayList<TokenMatcher> errorMatchers = new ArrayList<>();
         final String stringErrorInvalid = "^(\"[^\"]*\")(.*)$";
         final String stringErrorIncomplete = "^(\"[^\"]*)()$";
-        final String characterErrorInvalid = "^('[^']*')(.*)$"; // Explicação: normalmente, essa regex passa caracteres válidos e inválidos. Mas só é checada se não existem válidos.
+        final String characterErrorInvalid = "^('[^']*')(.*)$";
         final String characterErrorIncomplete = "^('[^']*)()$";
         final String numberError = "^(\\d+\\.)(.*){0,1}$";
         final String symbolError = "^(.)(.*)$";
