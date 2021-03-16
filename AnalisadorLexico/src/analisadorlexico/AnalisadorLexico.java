@@ -53,19 +53,25 @@ public class AnalisadorLexico {
                 for (String line; (line = reader.readLine()) != null;) {
                     code.add(line);
                 }
+                int errors = 0;
                 Lexer lexer = new Lexer(code);
                 for (Token token : lexer.getTokens()) {
+                    if(token.isError())
+                        errors++;
                     writer.write(token.toString() + "\r\n");
 
                 }
                 writer.write("\n");
-                boolean noerrors = true;
+                /*boolean noerrors = true;
                 for (Token error : lexer.getErrors()) {
                     writer.write(error.toString() + "\r\n");
                     noerrors = false;
-                }
-                if (noerrors) {
+                }*/
+                
+                if (errors == 0) {
                     writer.write("Sem Erros");
+                }else{
+                    writer.write("O Arquivo tem " + errors + " erros");
                 }
 
                 writer.flush();

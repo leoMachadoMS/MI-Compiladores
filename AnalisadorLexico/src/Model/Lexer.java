@@ -24,56 +24,49 @@ public class Lexer {
         errors = new ArrayList<>();
 
         final String reserved = "(var|const|typedef|struct|extends|procedure|function|start|return|if|else|then|while|read|print|int|real|boolean|string|true|false|global|local)";
-
         final String identifier = "([a-zA-Z]\\w*)";
-
         final String number = "(-?\\s*\\d+\\.?\\d+)";
-
         final String lineComment = "(//.*)";
-
         final String arithmetic = "(\\+\\+|\\-\\-|[\\%\\*\\-\\+/])";
-
         final String logicalOp = "(&&|\\|\\||!)";
-
         final String string = "(\"[^\"]*\")";
-
         final String commentBegin = "(/\\*)";
-
         final String commentEnd = "(\\*/)";
-
-        final String relational = "(!=|<=|>=|=|<|>|==)";
-
+        final String relational = "(!=|<=|>=|==|<|>|=)";
         final String delimiter = "([;,\\(\\){}\\[\\]\\.])";
-
-        Pattern beginCommentPattern = Pattern.compile("^" + commentBegin + "(.*)$");
-        Pattern endCommentPattern = Pattern.compile(commentEnd + "(.*)$");
-        ArrayList<TokenMatcher> matchers = new ArrayList<>();
-        matchers.add(new TokenMatcher("^" + reserved + "([\\W].*){0,1}$", TokenType.Reserved));
-        matchers.add(new TokenMatcher("^" + identifier + "([\\W].*){0,1}$", TokenType.Identifier));
-        matchers.add(new TokenMatcher("^" + string + "(.*)$", TokenType.String));
-        matchers.add(new TokenMatcher("^" + number + "(\\D.*){0,1}$", TokenType.Number));
-        matchers.add(new TokenMatcher("^" + lineComment + "(.*)$", TokenType.LineComment));
-        matchers.add(new TokenMatcher("^" + arithmetic + "(.*)$", TokenType.ArithmeticOperator));
-        matchers.add(new TokenMatcher("^" + delimiter + "(.*)$", TokenType.Delimiter));
-        matchers.add(new TokenMatcher("^" + relational + "(.*)$", TokenType.RelationalOperator));
-        matchers.add(new TokenMatcher("^" + logicalOp + "([\\W].*){0,1}$", TokenType.LogicalOperator));
-
+        
         // Errors!
-        ArrayList<TokenMatcher> errorMatchers = new ArrayList<>();
+        //ArrayList<TokenMatcher> errorMatchers = new ArrayList<>();
         final String stringErrorInvalid = "^(\"[^\"]*\")(.*)$";
         final String stringErrorIncomplete = "^(\"[^\"]*)()$";
         final String characterErrorInvalid = "^('[^']*')(.*)$";
         final String characterErrorIncomplete = "^('[^']*)()$";
         final String numberError = "^(\\d+\\.)(.*){0,1}$";
         final String symbolError = "^(.)(.*)$";
+        
+        final String digit = "^(\\d+)(.*)$"; // Para adaptar aos padrões de erros colocados em sessão
 
-        errorMatchers.add(new TokenMatcher(stringErrorInvalid, TokenType.InvalidString));
-        errorMatchers.add(new TokenMatcher(stringErrorIncomplete, TokenType.InvalidString));
-        errorMatchers.add(new TokenMatcher(characterErrorInvalid, TokenType.InvalidCharacter));
-        errorMatchers.add(new TokenMatcher(characterErrorIncomplete, TokenType.InvalidCharacter));
-        errorMatchers.add(new TokenMatcher(numberError, TokenType.InvalidNumber));
-        errorMatchers.add(new TokenMatcher(symbolError, TokenType.InvalidSymbol));
+        Pattern beginCommentPattern = Pattern.compile("^" + commentBegin + "(.*)$");
+        Pattern endCommentPattern = Pattern.compile(commentEnd + "(.*)$");
+        ArrayList<TokenMatcher> matchers = new ArrayList<>();
+        matchers.add(new TokenMatcher("^" + reserved + "([\\W].*){0,1}$", TokenType.Reserved, false));
+        matchers.add(new TokenMatcher("^" + identifier + "([\\W].*){0,1}$", TokenType.Identifier, false));
+        matchers.add(new TokenMatcher("^" + string + "(.*)$", TokenType.String, false));
+        matchers.add(new TokenMatcher("^" + number + "(\\D.*){0,1}$", TokenType.Number, false));
+        matchers.add(new TokenMatcher("^" + lineComment + "(.*)$", TokenType.LineComment, false));
+        matchers.add(new TokenMatcher("^" + arithmetic + "(.*)$", TokenType.ArithmeticOperator, false));
+        matchers.add(new TokenMatcher("^" + delimiter + "(.*)$", TokenType.Delimiter, false));
+        matchers.add(new TokenMatcher("^" + relational + "(.*)$", TokenType.RelationalOperator, false));
+        matchers.add(new TokenMatcher("^" + logicalOp + "([\\W].*){0,1}$", TokenType.LogicalOperator, false));
 
+        
+        matchers.add(new TokenMatcher(stringErrorInvalid, TokenType.InvalidString , true));
+        matchers.add(new TokenMatcher(stringErrorIncomplete, TokenType.InvalidString, true));
+        matchers.add(new TokenMatcher(characterErrorInvalid, TokenType.InvalidCharacter, true));
+        matchers.add(new TokenMatcher(characterErrorIncomplete, TokenType.InvalidCharacter, true));
+        matchers.add(new TokenMatcher(numberError, TokenType.InvalidNumber, true));
+        matchers.add(new TokenMatcher(digit, TokenType.Number, false));
+        matchers.add(new TokenMatcher(symbolError, TokenType.InvalidSymbol, true));
         int lineNumber = 0;
 
         boolean commentSearch = false;
@@ -115,7 +108,7 @@ public class Lexer {
                     }
                 }
 
-                if (!matched) {
+                /*if (!matched) {
                     for (TokenMatcher m : errorMatchers) {
                         try {
                             TokenMatch match = m.match(line, lineNumber);
@@ -126,7 +119,7 @@ public class Lexer {
                         } catch (Exception e) {
                         }
                     }
-                }
+                }*/
 
                 if (!matched) {
                     System.err.println("Erro que ainda não tratei. Linha: " + lineNumber + ": " + line);
@@ -137,7 +130,7 @@ public class Lexer {
         }
 
         if (commentSearch) {
-            errors.add(new Token(0,TokenType.InvalidComment, "", 0, lineNumber));
+            errors.add(new Token(0,TokenType.InvalidComment, "", 0, lineNumber, true));
         }
         int i =0;
         for(Token t: tokens){
