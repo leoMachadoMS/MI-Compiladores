@@ -19,16 +19,21 @@
 10 <ART> /
 11 <ART> *
 11 <ART> /
-12 <ART> --
-13 <DEL> .
-14 <NRO> 3.14
-15 <NMF> 3.
-15 <DEL> .
-15 <NRO> 14
-15 <NRO> 15
-15 <NRO> 16
-16 <IDE> a
-16 <REL> <=
-16 <NRO> 2
+12 <REL> ==
+13 <CAD> "casa loca"
+14 <CMF> "casa
+15 <IDE> loca
+15 <CMF> "
+16 <ART> --
+17 <DEL> .
+18 <NRO> 3.14
+19 <NMF> 3.
+19 <DEL> .
+19 <NRO> 14
+19 <NRO> 15
+19 <NRO> 16
+20 <IDE> a
+20 <REL> <=
+20 <NRO> 2
 
-O Arquivo tem 1 erros
+O Arquivo tem 3 erros

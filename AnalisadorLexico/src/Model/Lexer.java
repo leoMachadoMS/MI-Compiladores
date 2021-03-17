@@ -108,19 +108,6 @@ public class Lexer {
                     }
                 }
 
-                /*if (!matched) {
-                    for (TokenMatcher m : errorMatchers) {
-                        try {
-                            TokenMatch match = m.match(line, lineNumber);
-                            errors.add(match.getToken());
-                            line = match.getLine();
-                            matched = true;
-                            break;
-                        } catch (Exception e) {
-                        }
-                    }
-                }*/
-
                 if (!matched) {
                     System.err.println("Erro que ainda não tratei. Linha: " + lineNumber + ": " + line);
                     break;

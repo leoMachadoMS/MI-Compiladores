@@ -62,12 +62,7 @@ public class AnalisadorLexico {
 
                 }
                 writer.write("\n");
-                /*boolean noerrors = true;
-                for (Token error : lexer.getErrors()) {
-                    writer.write(error.toString() + "\r\n");
-                    noerrors = false;
-                }*/
-                
+                                
                 if (errors == 0) {
                     writer.write("Sem Erros");
                 }else{

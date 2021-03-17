@@ -9,6 +9,10 @@ var lollll
 ++
 /
 */
+==
+"casa loca"
+"casa
+loca"
 --
 .
 3.14
